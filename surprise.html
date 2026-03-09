@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="center-title">StoriesHub</div>
+<div class="tagline">"Select Your Vibe. Discover Your Tale."</div>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+/* ---------------- BACKGROUND ---------------- */
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #b784db, #ffb7a5, #c89bff, #ffc2b3);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ---------------- TITLE ---------------- */
+
+.center-title {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Great Vibes', cursive;
+    font-size: 120px;
+    color: white;
+    text-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+.tagline {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-family: 'Great Vibes', cursive;
+    color: white;
+    letter-spacing: 1px;
+    font-weight: 300;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    opacity: 0.95;
+}
+
+/* ---------------- TOP LEFT ---------------- */
+
+.top-left {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    display: flex;
+    gap: 12px;
+}
+
+.search-box input {
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    width: 220px;
+    background: rgba(255,255,255,0.9);
+}
+
+.home-btn {
+    padding: 10px 18px;
+    border-radius: 25px;
+    border: none;
+    background: rgba(255,255,255,0.95);
+    cursor: pointer;
+}
+
+/* ---------------- SETTINGS ---------------- */
+
+.settings {
+    position: absolute;
+    top: 22px;
+    right: 30px;
+    font-size: 22px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.9);
+    padding: 8px 12px;
+    border-radius: 50%;
+}
+
+/* ---------------- BUTTONS ---------------- */
+
+.bottom-controls {
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.icon-btn {
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    background: white;
+    font-weight: 500;
+}
+
+/* ---------------- POPUP ---------------- */
+
+.popup {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.97);
+    display: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.popup button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 12px;
+    border: none;
+    background: #b784db;
+    color: white;
+    cursor: pointer;
+}
+
+.close-btn {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+
+    background: none;
+    border: none;
+
+    width: auto !important;
+    height: auto;
+    padding: 0;
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 300;
+    color: #aaa;
+
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #ff4d4d;
+}
+
+.popup h3 {
+    margin-top: 0;
+    color: #b784db;
+}
+
+.popup select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    border-radius: 10px;
+    border: none;
+}
+
+.recommendation {
+    margin-top: 15px;
+    padding: 10px;
+    background: #ffe5dc;
+    border-radius: 10px;
+    display: none;
+}
+
+.quote-box {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f3e8ff;
+    border-radius: 12px;
+    font-style: italic;
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+<div class="top-left">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search stories..." onkeydown="if(event.key==='Enter'){searchBook()}">
+    </div>
+    <button class="home-btn"> Home</button>
+</div>
+
+<div class="settings">⚙</div>
+
+<div class="center-title">StoriesHub</div>
+
+<div class="bottom-controls">
+    <button class="icon-btn" onclick="openPopup()"> Mood Setter</button>
+    <button class="icon-btn" onclick="openSurprise()"> Surprise me</button>
+</div>
+
+<!-- MOOD POPUP -->
+<div class="popup" id="popup">
+<button class="close-btn" onclick="closePopup()">✕</button>
+<h3>Set Your Mood</h3>
+
+<label>Select your mood:</label>
+<select id="mood">
+<option>Happy</option>
+<option>Sad</option>
+<option>Adventurous</option>
+<option>Romantic</option>
+</select>
+
+<label>Select your genre:</label>
+<select id="genre">
+<option value="mystery">Mystery</option>
+<option value="drama">Drama</option>
+<option value="history">History</option>
+<option value="horror">Horror</option>
+<option value="crime">Crime</option>
+<option value="fantasy">Fantasy</option>
+<option value="romance">Romance</option>
+</select>
+
+<button onclick="recommend()">Get Recommendation</button>
+<div class="recommendation" id="result"></div>
+</div>
+
+<!-- SEARCH POPUP -->
+<div class="popup" id="searchPopup">
+<button class="close-btn" onclick="closeSearch()">✕</button>
+<h3> Search Result</h3>
+<div class="recommendation" id="searchResult" style="display:block;"></div>
+</div>
+
+<!-- SURPRISE POPUP -->
+<div class="popup" id="surprisePopup">
+<button class="close-btn" onclick="closeSurprise()">✕</button>
+<h3>✨ Surprise Quote</h3>
+<div class="quote-box" id="quoteText"></div>
+<button onclick="newQuote()">Surprise me again 🎲</button>
+</div>
+
+<script>
+
+/* GLOBAL BOOK DATABASE */
+
+const books = {
+mystery: [
+{ title:"And Then There Were None", author:"Agatha Christie", description:"Ten strangers are invited to a secluded island, only to be killed one by one." },
+{ title:"400 Days", author:"Chetan Bhagat", description:"A missing child case unravels dark secrets and hidden truths." }
+],
+drama: [
+{ title:"Tuesdays with Morrie", author:"Mitch Albom", description:"A heartfelt story about life and meaningful lessons." },
+{ title:"A Little Life", author:"Hanya Yanagihara", description:"An emotional journey of friendship and hidden pain." }
+],
+history: [
+{ title:"The Palace of Illusions", author:"Chitra Banerjee Divakaruni", description:"The Mahabharata retold from Draupadi’s perspective." },
+{ title:"The Queen", author:"Andrew Morton", description:"A glimpse into royalty and history." }
+],
+horror: [
+{ title:"Verity", author:"Colleen Hoover", description:"A psychological thriller filled with dark secrets." }
+],
+fantasy: [
+{ title:"Fourth Wing", author:"Rebecca Yarros", description:"A dragon-rider academy where survival is never guaranteed." }
+],
+crime: [
+{ title:"And Then There Were None", author:"Agatha Christie", description:"Guests trapped on an island are mysteriously murdered." },
+{ title:"400 Days", author:"Chetan Bhagat", description:"A detective dives into a complex kidnapping case." }
+],
+romance: [
+{ title:"Deep End", author:"Ali Hazelwood", description:"A passionate romance full of emotional intensity." },
+{ title:"Fourth Wing", author:"Rebecca Yarros", description:"Fantasy and romance collide in a dangerous academy." }
+]
+};
+
+/* SEARCH FUNCTION */
+
+function searchBook() {
+const input = document.getElementById("searchInput").value.toLowerCase();
+const resultBox = document.getElementById("searchResult");
+let found = null;
+
+for (let genre in books) {
+books[genre].forEach(book => {
+if (
+book.title.toLowerCase().includes(input) ||
+book.author.toLowerCase().includes(input)
+) {
+found = book;
+}
+});
+}
+
+if (found) {
+resultBox.innerHTML = `
+ <strong>${found.title}</strong><br>
+ ${found.author}<br><br>
+ {found.description}
+`;
+} else {
+resultBox.innerHTML = "No results found 😢";
+}
+
+document.getElementById("searchPopup").style.display = "block";
+}
+
+function closeSearch() {
+document.getElementById("searchPopup").style.display = "none";
+}
+
+/* EXISTING FUNCTIONS */
+
+function openPopup(){ document.getElementById("popup").style.display="block"; }
+function closePopup(){ document.getElementById("popup").style.display="none"; }
+function openSurprise(){ document.getElementById("surprisePopup").style.display="block"; newQuote(); }
+function closeSurprise(){ document.getElementById("surprisePopup").style.display="none"; }
+
+const quotes = [
+"“The world is full of obvious things which nobody observes.” — Agatha Christie",
+"“Death is not the greatest loss in life.” — Mitch Albom",
+"“You do not yield.” — Fourth Wing",
+"“Sometimes the truth is more terrifying than fiction.” — Verity"
+];
+
+function newQuote(){
+const randomIndex=Math.floor(Math.random()*quotes.length);
+document.getElementById("quoteText").innerHTML=quotes[randomIndex];
+}
+
+function recommend(){
+const genre=document.getElementById("genre").value;
+const result=document.getElementById("result");
+const selectedBooks=books[genre];
+const randomBook=selectedBooks[Math.floor(Math.random()*selectedBooks.length)];
+
+result.innerHTML=`
+ <strong>${randomBook.title}</strong><br>
+ ${randomBook.author}<br><br>
+ {randomBook.description}
+`;
+result.style.display="block";
+}
+
+</script>
+
+</body>
+</html>

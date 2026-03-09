@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DriveDesh Payment Portal</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0b132b;
+color:white;
+}
+
+.container{
+width:90%;
+max-width:500px;
+margin:80px auto;
+background:#111a3a;
+padding:30px;
+border-radius:15px;
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+.booking{
+background:#1a2447;
+padding:15px;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+.upi-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-bottom:20px;
+}
+
+.upi{
+background:#1f2c5c;
+padding:15px;
+border-radius:10px;
+text-align:center;
+cursor:pointer;
+}
+
+input{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:none;
+margin-top:10px;
+}
+
+.qr{
+text-align:center;
+margin-top:20px;
+}
+
+.qr img{
+width:200px;
+border-radius:10px;
+}
+
+.pay-btn{
+margin-top:25px;
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+font-size:16px;
+background:linear-gradient(90deg,#4b7bec,#a55eea);
+color:white;
+cursor:pointer;
+}
+
+.footer{
+text-align:center;
+margin-top:10px;
+font-size:12px;
+opacity:0.8;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>UPI Payment</h2>
+
+<div class="booking">
+<p><b>Vehicle:</b> <span id="vehicle"></span></p>
+<p><b>Name:</b> <span id="name"></span></p>
+<p><b>Date:</b> <span id="date"></span></p>
+<p><b>Time:</b> <span id="time"></span></p>
+<p><b>Amount:</b> ₹<span id="amount"></span></p>
+</div>
+
+<div class="upi-grid">
+<div class="upi">Google Pay</div>
+<div class="upi">PhonePe</div>
+<div class="upi">Paytm</div>
+<div class="upi">BHIM</div>
+<div class="upi">FamPay</div>
+<div class="upi">Other UPI</div>
+</div>
+
+<label>UPI ID</label>
+<input type="text" value="8247579353@fam">
+
+<div class="qr">
+<h3>Scan QR to Pay</h3>
+<img src="qrcode.jpeg">
+<p>Scan with any UPI app</p>
+</div>
+
+<button class="pay-btn" onclick="confirmPayment()">✅ Confirm UPI Payment</button>
+
+<div class="footer">
+🔒 256-bit SSL encrypted | PCI DSS compliant | Cancel anytime
+</div>
+
+</div>
+
+<script>
+
+// Load booking data
+document.getElementById("vehicle").innerText = localStorage.getItem("vehicle");
+document.getElementById("name").innerText = localStorage.getItem("name");
+document.getElementById("date").innerText = localStorage.getItem("date");
+document.getElementById("time").innerText = localStorage.getItem("time");
+document.getElementById("amount").innerText = localStorage.getItem("amount");
+
+function confirmPayment(){
+alert("Payment Successful! Your Kia Carnival booking is confirmed.");
+}
+
+</script>
+
+</body>
+</html>
