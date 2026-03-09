@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stories Hub | Login</title>
+
+<style>
+
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Georgia, "Georgia Pro", serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+
+    /* Soft animated gradient */
+    background: linear-gradient(-45deg, #c8a2c8, #f8c8dc, #ffd1a9, #d8bfd8);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+}
+
+/* ===== Animated Gradient ===== */
+
+@keyframes gradientShift{
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
+}
+
+/* ===== Login Card ===== */
+
+.login-card{
+    width:380px;
+    padding:40px;
+    border-radius:20px;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    text-align:center;
+    animation: fadeIn 1.5s ease;
+}
+
+/* Heading */
+.login-card h2{
+    margin-bottom:25px;
+    font-size:28px;
+    color:#5e3a6d;
+}
+
+/* Inputs */
+.form-group{
+    margin-bottom:20px;
+    text-align:left;
+}
+
+label{
+    font-size:15px;
+    color:#4b2e57;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #e6b8a2;
+    margin-top:6px;
+    background:rgba(255,255,255,0.8);
+    font-size:14px;
+    transition:0.3s;
+}
+
+input:focus{
+    outline:none;
+    border-color:#b57edc;
+    box-shadow:0 0 8px #b57edc;
+}
+
+/* Button */
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background: linear-gradient(45deg, #b57edc, #ffb6a3);
+    color:white;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.4s;
+}
+
+button:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 15px #b57edc;
+}
+
+/* Register */
+.register{
+    margin-top:15px;
+    font-size:14px;
+}
+
+.register a{
+    text-decoration:none;
+    color:#6a3d7a;
+    font-weight:bold;
+}
+
+/* Fade In */
+@keyframes fadeIn{
+    from{ opacity:0; transform:translateY(-20px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+/* Responsive */
+@media(max-width:480px){
+    .login-card{
+        width:90%;
+        padding:30px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-card">
+    <h2>Stories Hub</h2>
+
+    <form>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" placeholder="Enter your username" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" placeholder="Enter your password" required>
+        </div>
+<a href="surprise.html" class="login-btn">Login</a>
+    <div class="register">
+        New here? <a href="#">Create Account</a>
+    </div>
+</div>
+
+</body>
+</html>
